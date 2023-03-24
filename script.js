@@ -1,24 +1,13 @@
-const firstNum = 0;
-const secondNum = 0;
+let firstNum = 0;
+let secondNum = 0;
 let operator = "";
-let operatorEntry = false;
+let numEntry = false;
 let displayValue = 0;
 
-function add(a, b) {
-    return a + b;
-}
-
-function subtract(a, b) {
-    return a - b;
-}
-
-function multiply(a, b) {
-    return a * b;
-}
-
-function divide(a, b) {
-    return a / b;
-}
+const add = (a, b) => a + b;
+const subtract = (a, b) => a - b;
+const multiply = (a, b) => a * b;
+const divide = (a, b) => a / b;
 
 function operate(a, b, operator) {
     switch (operator) {
@@ -37,14 +26,15 @@ function operate(a, b, operator) {
     }
 }
 
-function displayEntry(number) {
-    const displayEntry = document.querySelector(".display-entry");
-    displayEntry.textContent += number;
+function display(number) {
+    const display = document.querySelector(".display");
+    display.textContent += number;
 }
 
 function operatorClick(operator) {
-    const displayEntry = document.querySelector(".display-entry");
-    displayEntry.textContent += operator;
+    const display = document.querySelector(".display");
+    firstNum = display.textContent;
+    numEntry = true;
 }
 
 const buttons = document.querySelectorAll("button");
@@ -52,7 +42,7 @@ buttons.forEach((button) => {
     if (button.classList.contains("digit")) {
         button.addEventListener("click", () => {
             displayValue = button.textContent;
-            displayEntry(displayValue);
+            display(displayValue);
         });
     }
     else if (button.classList.contains("operator")) {
@@ -63,7 +53,7 @@ buttons.forEach((button) => {
     }
     else if (button.classList.contains("equals")) {
         button.addEventListener("click", () => {
-
+            
         });
     }
 });
