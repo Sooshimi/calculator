@@ -1,6 +1,7 @@
 const firstNum = 0;
 const secondNum = 0;
 const operator = "";
+let operatorEntry = false;
 let displayValue = 0;
 
 function add(a, b) {
@@ -38,12 +39,15 @@ function operate(a, b, operator) {
 
 function displayEntry(number) {
     const displayEntry = document.querySelector(".display-entry");
-    displayEntry.textContent = number;
+    if (!operatorEntry) {
+        displayEntry.textContent += number;
+    }
 }
 
 const buttons = document.querySelectorAll("button.digit");
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
-        displayEntry(button.textContent);
-    })
+        displayValue = button.textContent;
+        displayEntry(displayValue);
+    });
 });
