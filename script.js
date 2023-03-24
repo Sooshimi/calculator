@@ -1,6 +1,6 @@
 const firstNum = 0;
 const secondNum = 0;
-const operator = "";
+let operator = "";
 let operatorEntry = false;
 let displayValue = 0;
 
@@ -39,9 +39,12 @@ function operate(a, b, operator) {
 
 function displayEntry(number) {
     const displayEntry = document.querySelector(".display-entry");
-    if (!operatorEntry) {
-        displayEntry.textContent += number;
-    }
+    displayEntry.textContent += number;
+}
+
+function operatorClick(operator) {
+    const displayEntry = document.querySelector(".display-entry");
+    displayEntry.textContent += operator;
 }
 
 const buttons = document.querySelectorAll("button");
@@ -50,6 +53,17 @@ buttons.forEach((button) => {
         button.addEventListener("click", () => {
             displayValue = button.textContent;
             displayEntry(displayValue);
+        });
+    }
+    else if (button.classList.contains("operator")) {
+        button.addEventListener("click", () => {
+            operator = button.textContent;
+            operatorClick(operator);
+        });
+    }
+    else if (button.classList.contains("equals")) {
+        button.addEventListener("click", () => {
+
         });
     }
 });
