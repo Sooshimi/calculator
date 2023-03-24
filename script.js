@@ -44,10 +44,12 @@ function displayEntry(number) {
     }
 }
 
-const buttons = document.querySelectorAll("button.digit");
+const buttons = document.querySelectorAll("button");
 buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-        displayValue = button.textContent;
-        displayEntry(displayValue);
-    });
+    if (button.classList.contains("digit")) {
+        button.addEventListener("click", () => {
+            displayValue = button.textContent;
+            displayEntry(displayValue);
+        });
+    }
 });
