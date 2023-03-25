@@ -1,8 +1,9 @@
 let firstNum = 0;
 let secondNum = 0;
 let operator = "";
-let numEntry = false;
+let firstNumEntry = false;
 let displayValue = 0;
+const numDisplay = document.querySelector(".display");
 
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
@@ -10,6 +11,8 @@ const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
 function operate(a, b, operator) {
+    a = Number(a);
+    b = Number(b);
     switch (operator) {
         case "+":
             return add(a, b);
@@ -27,14 +30,24 @@ function operate(a, b, operator) {
 }
 
 function display(number) {
-    const display = document.querySelector(".display");
-    display.textContent += number;
+    numDisplay.textContent += number;
+    if (firstNumEntry) {
+        secondNum = numDisplay.textContent;
+        console.log(secondNum);
+    }
 }
 
 function operatorClick(operator) {
-    const display = document.querySelector(".display");
-    firstNum = display.textContent;
-    numEntry = true;
+    firstNum = numDisplay.textContent;
+    firstNumEntry = true;
+    console.log(firstNum);
+    console.log(operator);
+}
+
+function equal() {
+    secondNum = numDisplay.textContent;
+    console.log(secondNum);
+    numDisplay.textContent = operate(firstNum, secondNum, operator);
 }
 
 const buttons = document.querySelectorAll("button");
@@ -49,11 +62,15 @@ buttons.forEach((button) => {
         button.addEventListener("click", () => {
             operator = button.textContent;
             operatorClick(operator);
+            if (firstNumEntry) {
+                numDisplay.textContent = "";
+                firstNumEntry = false;
+            }
         });
     }
-    else if (button.classList.contains("equals")) {
+    else if (button.classList.contains("equal")) {
         button.addEventListener("click", () => {
-            
+            equal();
         });
     }
 });
