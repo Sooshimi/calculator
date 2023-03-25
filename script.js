@@ -30,24 +30,25 @@ function operate(a, b, operator) {
 }
 
 function display(number) {
-    numDisplay.textContent += number;
     if (firstNumEntry) {
-        secondNum = numDisplay.textContent;
-        console.log(secondNum);
+        numDisplay.textContent = "";
+        firstNumEntry = false;
     }
+    numDisplay.textContent += number;
 }
 
 function operatorClick(operator) {
     firstNum = numDisplay.textContent;
     firstNumEntry = true;
-    console.log(firstNum);
+    console.log("firstNum = " + firstNum);
     console.log(operator);
 }
 
 function equal() {
     secondNum = numDisplay.textContent;
-    console.log(secondNum);
+    console.log("secondNum = " + secondNum);
     numDisplay.textContent = operate(firstNum, secondNum, operator);
+    console.log(numDisplay.textContent);
 }
 
 const buttons = document.querySelectorAll("button");
@@ -62,10 +63,6 @@ buttons.forEach((button) => {
         button.addEventListener("click", () => {
             operator = button.textContent;
             operatorClick(operator);
-            if (firstNumEntry) {
-                numDisplay.textContent = "";
-                firstNumEntry = false;
-            }
         });
     }
     else if (button.classList.contains("equal")) {
