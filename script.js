@@ -30,9 +30,14 @@ function operate(a, b, operator) {
 }
 
 function display(number) {
+    // clear display on second number entry
     if (firstNumEntry) {
         numDisplay.textContent = "";
         firstNumEntry = false;
+    }
+    // prevent multiple decimal points
+    if (number === "." && numDisplay.textContent.includes(".")) {
+        return;
     }
     numDisplay.textContent += number;
 }
