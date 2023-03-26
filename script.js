@@ -3,6 +3,7 @@ let secondNum = 0;
 let operator = "";
 let firstNumSave = false;
 let firstCalcRun = false;
+let prevEqual = false;
 let displayValue = 0;
 const numDisplay = document.querySelector(".display");
 
@@ -45,12 +46,14 @@ function display(number) {
 }
 
 function equal() {
-    secondNum = numDisplay.textContent;
+    if (!prevEqual) {
+        secondNum = numDisplay.textContent;
+    }
+    //secondNum = numDisplay.textContent;
     firstNum = operate(firstNum, secondNum, operator);
     numDisplay.textContent = firstNum;
     firstNumSave = true;
     firstCalcRun = false;
-    prevEqual = true;
     console.log("firstNum = " + firstNum);
     console.log("secondNum = " + secondNum);
     console.log("operator = " + operator);
@@ -76,6 +79,7 @@ buttons.forEach((button) => {
                 firstNum = numDisplay.textContent;
                 firstNumSave = true;
             }
+            prevEqual = false;
         });
     }
     else if (button.classList.contains("clear")) {
@@ -96,6 +100,7 @@ buttons.forEach((button) => {
     else if (button.classList.contains("equal")) {
         button.addEventListener("click", () => {
             equal();
+            prevEqual = true;
         });
     }
 });
