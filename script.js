@@ -2,6 +2,7 @@ let firstNum = 0;
 let secondNum = 0;
 let operator = "";
 let firstNumSave = false;
+let firstCalcRun = false;
 let displayValue = 0;
 const numDisplay = document.querySelector(".display");
 
@@ -11,6 +12,7 @@ const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
 function operate(a, b, operator) {
+    firstCalcRun = true;
     a = Number(a);
     b = Number(b);
     switch (operator) {
@@ -31,9 +33,9 @@ function operate(a, b, operator) {
 
 function display(number) {
     // clear display on second number entry
-    if (firstNumSave && operator != "=") {
+    if (firstNumSave) {
         numDisplay.textContent = "";
-        firstNumSave == false;
+        firstNumSave = false;
     }
     // prevent multiple decimal points
     if (number === "." && numDisplay.textContent.includes(".")) {
@@ -42,21 +44,16 @@ function display(number) {
     numDisplay.textContent += number;
 }
 
-function operatorClick(operator) {
-    if (firstNumSave && operator != "=") {
-        equal();
-    }
-    firstNum = numDisplay.textContent;
-    firstNumSave = true;
-    console.log("firstNum = " + firstNum);
-    console.log(operator);
-}
-
 function equal() {
     secondNum = numDisplay.textContent;
+    firstNum = operate(firstNum, secondNum, operator);
+    numDisplay.textContent = firstNum;
+    firstNumSave = true;
+    firstCalcRun = false;
+    prevEqual = true;
+    console.log("firstNum = " + firstNum);
     console.log("secondNum = " + secondNum);
-    numDisplay.textContent = operate(firstNum, secondNum, operator);
-    console.log("total = " + numDisplay.textContent);
+    console.log("operator = " + operator);
 }
 
 const buttons = document.querySelectorAll("button");
@@ -69,8 +66,16 @@ buttons.forEach((button) => {
     }
     else if (button.classList.contains("operator")) {
         button.addEventListener("click", () => {
-            operator = button.textContent;
-            operatorClick(operator);
+            if (firstCalcRun) {
+                equal();
+                operator = button.textContent;
+            }
+            else if (!firstCalcRun) {
+                operator = button.textContent;
+                firstCalcRun = true;
+                firstNum = numDisplay.textContent;
+                firstNumSave = true;
+            }
         });
     }
     else if (button.classList.contains("clear")) {
@@ -80,6 +85,7 @@ buttons.forEach((button) => {
             secondNum = 0;
             operator = "";
             firstNumEntry = false;
+            firstCalcRun = false;
         });
     }
     else if (button.classList.contains("delete")) {
