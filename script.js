@@ -58,9 +58,6 @@ function equal() {
     numDisplay.textContent = firstNum;
     firstNumSave = true;
     firstCalcRun = false;
-    console.log("firstNum = " + firstNum);
-    console.log("secondNum = " + secondNum);
-    console.log("operator = " + operator);
 }
 
 const buttons = document.querySelectorAll("button");
