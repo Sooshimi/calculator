@@ -1,7 +1,7 @@
 let firstNum = 0;
 let secondNum = 0;
 let operator = "";
-let firstNumEntry = false;
+let firstNumSave = false;
 let displayValue = 0;
 const numDisplay = document.querySelector(".display");
 
@@ -31,9 +31,9 @@ function operate(a, b, operator) {
 
 function display(number) {
     // clear display on second number entry
-    if (firstNumEntry) {
+    if (firstNumSave && operator != "=") {
         numDisplay.textContent = "";
-        firstNumEntry = false;
+        firstNumSave == false;
     }
     // prevent multiple decimal points
     if (number === "." && numDisplay.textContent.includes(".")) {
@@ -43,8 +43,11 @@ function display(number) {
 }
 
 function operatorClick(operator) {
+    if (firstNumSave && operator != "=") {
+        equal();
+    }
     firstNum = numDisplay.textContent;
-    firstNumEntry = true;
+    firstNumSave = true;
     console.log("firstNum = " + firstNum);
     console.log(operator);
 }
@@ -53,7 +56,7 @@ function equal() {
     secondNum = numDisplay.textContent;
     console.log("secondNum = " + secondNum);
     numDisplay.textContent = operate(firstNum, secondNum, operator);
-    console.log(numDisplay.textContent);
+    console.log("total = " + numDisplay.textContent);
 }
 
 const buttons = document.querySelectorAll("button");
