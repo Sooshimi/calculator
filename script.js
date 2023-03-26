@@ -73,6 +73,10 @@ buttons.forEach((button) => {
     else if (button.classList.contains("clear")) {
         button.addEventListener("click", () => {
             numDisplay.textContent = "";
+            firstNum = 0;
+            secondNum = 0;
+            operator = "";
+            firstNumEntry = false;
         });
     }
     else if (button.classList.contains("delete")) {
