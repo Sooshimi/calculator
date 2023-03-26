@@ -65,6 +65,16 @@ buttons.forEach((button) => {
             operatorClick(operator);
         });
     }
+    else if (button.classList.contains("clear")) {
+        button.addEventListener("click", () => {
+            numDisplay.textContent = "";
+        });
+    }
+    else if (button.classList.contains("delete")) {
+        button.addEventListener("click", () => {
+            numDisplay.textContent = numDisplay.textContent.slice(0, -1);
+        });
+    }
     else if (button.classList.contains("equal")) {
         button.addEventListener("click", () => {
             equal();
