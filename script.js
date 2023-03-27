@@ -58,7 +58,6 @@ function equal() {
     if (!prevEqual) {
         secondNum = numDisplay.textContent;
     }
-    //secondNum = numDisplay.textContent;
     firstNum = operate(firstNum, secondNum, operator);
     numDisplay.textContent = firstNum;
     firstNumSave = true;
